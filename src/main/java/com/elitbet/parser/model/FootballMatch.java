@@ -68,23 +68,27 @@ public class FootballMatch extends DataObject {
     public long getTimestamp(){
         return date.getTime();
     }
-    //event/footballmatch/add?firstteam=Arsenal&secondteam=Chelsea&tournament=English Premier League&firstwincoefficient=2.0&secondwincoefficient=2.5&drawcoefficient=3.2
+    //events/footballmatches/create?access_token=ry6n3n7m3u&start_timestamp=100000000&first_name=Arsenal&second_name=Chelsea&tournament=EPL&first_win=2.0&second_win=2.5&draw=3.2
     @Override
     public String toURL() {
         StringBuilder stringBuilder = new StringBuilder();
         try {
             stringBuilder.
-                    append("/event/footballmatch/add?firstteam=").
+                    append("/events/footballmatches/create?access_token=").
+                    append(URLEncoder.encode("mikola_lox", "UTF-8")).
+                    append("&start_timestamp=").
+                    append(URLEncoder.encode(String.valueOf(getTimestamp()), "UTF-8")).
+                    append("&first_name=").
                     append(URLEncoder.encode(String.valueOf(homeTeam), "UTF-8")).
-                    append("&secondteam=").
+                    append("&second_name=").
                     append(URLEncoder.encode(String.valueOf(guestTeam), "UTF-8")).
                     append("&tournament=").
                     append(URLEncoder.encode(String.valueOf(tournamentName), "UTF-8")).
-                    append("&firstwincoefficient=").
+                    append("&first_win=").
                     append(URLEncoder.encode(String.valueOf(homeCoefficient), "UTF-8")).
-                    append("&secondwincoefficient=").
+                    append("&second_win=").
                     append(URLEncoder.encode(String.valueOf(guestCoefficient), "UTF-8")).
-                    append("&drawcoefficient=").
+                    append("&draw=").
                     append(URLEncoder.encode(String.valueOf(drawCoefficient), "UTF-8"));
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();

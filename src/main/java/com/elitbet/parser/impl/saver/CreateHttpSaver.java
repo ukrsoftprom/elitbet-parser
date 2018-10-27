@@ -9,14 +9,20 @@ import java.net.URL;
 import java.util.List;
 import java.util.logging.Logger;
 
-public class HttpSaver implements Saver {
-    private final static Logger logger = Logger.getLogger(HttpSaver.class.getName());
+public class CreateHttpSaver implements Saver {
+    private final static Logger logger = Logger.getLogger(CreateHttpSaver.class.getName());
     private HttpURLConnection httpURLConnection;
     private String host;
 
-    public HttpSaver() {
+    public CreateHttpSaver() {
+        try {
+            URL url = new URL("http://localhost:8080");
+            httpURLConnection = (HttpURLConnection) url.openConnection();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
-    public HttpSaver(URL url) {
+    public CreateHttpSaver(URL url) {
         try {
             httpURLConnection = (HttpURLConnection) url.openConnection();
         } catch (IOException e) {

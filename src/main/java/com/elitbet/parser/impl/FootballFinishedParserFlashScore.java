@@ -98,7 +98,7 @@ public class FootballFinishedParserFlashScore implements Parser {
                 footballMatchResult.setGuestTeam(teamAway);
                 footballMatchResult.setHomeTeamGoals(goals[0]);
                 footballMatchResult.setGuestTeamGoals(goals[1]);
-                System.out.println(footballMatchResult);
+                dataObjects.add(footballMatchResult);
             }
         }
     }
@@ -113,6 +113,7 @@ public class FootballFinishedParserFlashScore implements Parser {
         try {
             parse();
             dataObjects.forEach(System.out::println);
+            saver.save(dataObjects);
         } catch (InterruptedException e) {
             e.printStackTrace();
         } catch (ParseException e) {

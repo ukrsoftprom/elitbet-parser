@@ -2,26 +2,30 @@
        xmlns="http://www.springframework.org/schema/beans"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
                            http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
-    <bean id="saver" class="com.elitbet.parser.impl.saver.HttpSaver">
-        <property name="host" value="http://localhost:8080"></property>
-    </bean>
+
     <bean id="createparser" class="com.elitbet.parser.impl.FootballCreateParserFlashScore">
         <property name="saver">
-            <ref bean="saver"></ref>
+            <bean class="com.elitbet.parser.impl.saver.CreateHttpSaver">
+                <property name="host" value="http://localhost:8080"></property>
+            </bean>
         </property>
         <property name="waitAfterClick"
                   value="8000"/> <!--if your computer or internet connection is slow - increase this value-->
     </bean>
     <bean id="updateparser" class="com.elitbet.parser.impl.FootballUpdateParserFlashScore">
         <property name="saver">
-            <ref bean="saver"></ref>
+            <bean class="com.elitbet.parser.impl.saver.UpdateHttpSaver">
+                <property name="host" value="http://localhost:8080"></property>
+            </bean>
         </property>
         <property name="waitAfterClick"
                   value="8000"/> <!--if your computer or internet connection is slow - increase this value-->
     </bean>
     <bean id="finishparser" class="com.elitbet.parser.impl.FootballFinishedParserFlashScore">
         <property name="saver">
-            <ref bean="saver"></ref>
+            <bean class="com.elitbet.parser.impl.saver.FinishHttpSaver">
+                <property name="host" value="http://localhost:8080"></property>
+            </bean>
         </property>
         <property name="waitAfterClick"
                   value="8000"/> <!--if your computer or internet connection is slow - increase this value-->

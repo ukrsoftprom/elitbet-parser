@@ -68,7 +68,10 @@ public class FootballCreateParserFlashScore implements Parser {
             List<Element> tournamentEvents = tournamentTable.queryAll("tbody tr");
             for(Element tournamentEvent:tournamentEvents){
                 List<Element> tournamentEventColumns = tournamentEvent.queryAll("td");
-                Element timeElement = tournamentEventColumns.get(1);  //time
+                Element timeElement = tournamentEventColumns.get(1);
+                if(!timeElement.hasClass("time-playing")){
+                    continue;
+                }
                 Element teamHomeElement = tournamentEventColumns.get(2); //home team
                 Element teamAwayElement = tournamentEventColumns.get(3);
                 Element eventScoreElement = tournamentEventColumns.get(4);
@@ -117,7 +120,7 @@ public class FootballCreateParserFlashScore implements Parser {
         try {
             parse();
             dataObjects.forEach(System.out::println);
-            //saver.save(dataObjects);
+            saver.save(dataObjects);
         } catch (InterruptedException e) {
             e.printStackTrace();
         } catch (ParseException e) {
