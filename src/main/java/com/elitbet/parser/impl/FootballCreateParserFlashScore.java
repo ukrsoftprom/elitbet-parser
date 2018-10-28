@@ -104,7 +104,7 @@ public class FootballCreateParserFlashScore implements Parser {
                 footballMatch.setGuestTeam(teamAway);
                 footballMatch.setHomeCoefficient(teamHomeCoefficient);
                 footballMatch.setDrawCoefficient(drawCoefficient);
-                footballMatch.setDrawCoefficient(drawCoefficient);
+                footballMatch.setGuestCoefficient(teamAwayCoefficient);
                 dataObjects.add(footballMatch);
             }
         }

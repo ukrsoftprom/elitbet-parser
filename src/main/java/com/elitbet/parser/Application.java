@@ -10,10 +10,9 @@ public class Application {
 
     public static void main(String[] args) throws InterruptedException {
         ApplicationContext applicationContext = new ClassPathXmlApplicationContext("context.xml");
-        Parser parser = (Parser) applicationContext.getBean("finishparser");
+        Parser parser = (Parser) applicationContext.getBean("createparser");
         Thread parserThread = new Thread(parser);
         parserThread.start();
         parserThread.join();
     }
-
 }
