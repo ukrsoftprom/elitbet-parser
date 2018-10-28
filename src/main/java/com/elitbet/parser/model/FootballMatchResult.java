@@ -11,7 +11,7 @@ public class FootballMatchResult extends DataObject {
     private int homeTeamGoals;
     private int guestTeamGoals;
     private Date date;
-
+    private String status;
     public FootballMatchResult() {
     }
 
@@ -25,15 +25,17 @@ public class FootballMatchResult extends DataObject {
                     append("&start_timestamp=").
                     append(URLEncoder.encode(String.valueOf(date.getTime()), "UTF-8")).
                     append("&first_name=").
-                    append(URLEncoder.encode(String.valueOf(homeTeam), "UTF-8")).
+                    append(URLEncoder.encode(homeTeam, "UTF-8")).
                     append("&second_name=").
-                    append(URLEncoder.encode(String.valueOf(guestTeam), "UTF-8")).
+                    append(URLEncoder.encode(guestTeam, "UTF-8")).
                     append("&tournament=").
-                    append(URLEncoder.encode(String.valueOf(tournamentName), "UTF-8")).
+                    append(URLEncoder.encode(tournamentName, "UTF-8")).
                     append("&first_goals=").
                     append(URLEncoder.encode(String.valueOf(homeTeamGoals), "UTF-8")).
                     append("&second_goals=").
-                    append(URLEncoder.encode(String.valueOf(guestTeamGoals), "UTF-8"));
+                    append(URLEncoder.encode(String.valueOf(guestTeamGoals), "UTF-8")).
+                    append("&status=").
+                    append(URLEncoder.encode(status,"UTF-8"));
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
@@ -81,7 +83,13 @@ public class FootballMatchResult extends DataObject {
         this.date = date;
     }
 
+    public String getStatus() {
+        return status;
+    }
 
+    public void setStatus(String status) {
+        this.status = status;
+    }
 
     @Override
     public String toString() {
@@ -91,6 +99,7 @@ public class FootballMatchResult extends DataObject {
                 ", homeTeamGoals=" + homeTeamGoals +
                 ", guestTeamGoals=" + guestTeamGoals +
                 ", date=" + date +
+                ", status='" + status + '\'' +
                 ", tournamentName='" + tournamentName + '\'' +
                 '}';
     }

@@ -47,17 +47,23 @@ public class FootballUpdateParserFlashScore implements Parser {
         simpleDateFormat = new SimpleDateFormat("y d/M E h:m", dateFormatSymbols);
     }
     private int[] parseGoals(String eventScoreRaw) throws ArrayIndexOutOfBoundsException{
-        System.out.println(eventScoreRaw);
-        int index = eventScoreRaw.indexOf("(");
-        String temp = eventScoreRaw;
-        if(index > 0){
-            temp = eventScoreRaw.substring(0,index);
-        }
-        String[] goalsRaw = temp.split("-");
         int [] goals = new int[2];
-        goals[0] = Integer.valueOf(goalsRaw[0]);
-        goals[1] = Integer.valueOf(goalsRaw[1]);
-        return goals;
+        try{
+            System.out.println(eventScoreRaw);
+            int index = eventScoreRaw.indexOf("(");
+            String temp = eventScoreRaw;
+            if(index > 0){
+                temp = eventScoreRaw.substring(0,index);
+            }
+            String[] goalsRaw = temp.split("-");
+            goals[0] = Integer.valueOf(goalsRaw[0]);
+            goals[1] = Integer.valueOf(goalsRaw[1]);
+            return goals;
+        }catch (Exception ex){
+            goals[0] = 0;
+            goals[1] = 0;
+            return goals;
+        }
     }
     @Override
     public void parse() throws InterruptedException, ParseException {
@@ -77,19 +83,11 @@ public class FootballUpdateParserFlashScore implements Parser {
                 Element timeElement = tournamentEventColumns.get(1);  //time
                 Element eventStatusElement = tournamentEventColumns.get(2);
                 String eventStatus = eventStatusElement.getText().get().replace("\u00a0","");
-                System.out.println("Update: " + eventStatus);
-                if(!(eventStatus.matches("[0-9]+[+]?[0-9]*") || eventStatus.equals("Half Time") || eventStatus.equals("After Pen."))){
-                    continue;
-                }
                 Element teamHomeElement = tournamentEventColumns.get(3); //home team
                 Element eventScoreElement = tournamentEventColumns.get(4);
                 String eventScoreRaw = eventScoreElement.getText().get().replace("\u00a0","");
                 int [] goals;
-                try{
-                    goals = parseGoals(eventScoreRaw);
-                }catch (ArrayIndexOutOfBoundsException ex){
-                    continue;
-                }
+                goals = parseGoals(eventScoreRaw);
                 Element teamAwayElement = tournamentEventColumns.get(5);
                 String time = timeElement.getText().get();
                 String teamHome = teamHomeElement.getText().get();
@@ -103,6 +101,7 @@ public class FootballUpdateParserFlashScore implements Parser {
                 footballMatchResult.setGuestTeam(teamAway);
                 footballMatchResult.setHomeTeamGoals(goals[0]);
                 footballMatchResult.setGuestTeamGoals(goals[1]);
+                footballMatchResult.setStatus(eventStatus);
                 dataObjects.add(footballMatchResult);
             }
         }
@@ -117,8 +116,6 @@ public class FootballUpdateParserFlashScore implements Parser {
     public void run() {
         try {
             parse();
-            System.out.println("chlen");
-            dataObjects.forEach(System.out::println);
             saver.save(dataObjects);
         } catch (InterruptedException e) {
             e.printStackTrace();
