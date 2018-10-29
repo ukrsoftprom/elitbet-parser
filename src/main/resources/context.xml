@@ -21,14 +21,5 @@
         <property name="waitAfterClick"
                   value="8000"/> <!--if your computer or internet connection is slow - increase this value-->
     </bean>
-    <bean id="finishparser" class="com.elitbet.parser.impl.FootballFinishedParserFlashScore">
-        <property name="saver">
-            <bean class="com.elitbet.parser.impl.saver.FinishHttpSaver">
-                <property name="host" value="http://localhost:8080"></property>
-            </bean>
-        </property>
-        <property name="waitAfterClick"
-                  value="8000"/> <!--if your computer or internet connection is slow - increase this value-->
-    </bean>
     <!--<bean id="updateparser" class="com.elitbet.parser.impltballCreateParserFlashScore"-->
 </beans>
