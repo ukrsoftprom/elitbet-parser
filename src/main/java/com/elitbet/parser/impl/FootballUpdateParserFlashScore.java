@@ -44,7 +44,7 @@ public class FootballUpdateParserFlashScore implements Parser {
                 "Sa",
         });
 
-        simpleDateFormat = new SimpleDateFormat("y d/M E h:m", dateFormatSymbols);
+        simpleDateFormat = new SimpleDateFormat("y d/M E H:m", dateFormatSymbols);
     }
     private int[] parseGoals(String eventScoreRaw) throws ArrayIndexOutOfBoundsException{
         int [] goals = new int[2];
@@ -68,7 +68,7 @@ public class FootballUpdateParserFlashScore implements Parser {
     @Override
     public void parse() throws InterruptedException, ParseException {
         Page page = browser.navigate("https://www.flashscore.com/");
-        Thread.sleep(1000);
+        Thread.sleep(5000);
         Document doc = page.getDocument();
         String date = doc.queryAll(".today").get(0).getText().get();
         String dateBase = "2018 " + date + " ";
@@ -85,13 +85,17 @@ public class FootballUpdateParserFlashScore implements Parser {
                 String eventStatus = eventStatusElement.getText().get().replace("\u00a0","");
                 Element teamHomeElement = tournamentEventColumns.get(3); //home team
                 Element eventScoreElement = tournamentEventColumns.get(4);
+
+                if(!eventScoreElement.getText().isPresent()){
+                    continue;
+                }
                 String eventScoreRaw = eventScoreElement.getText().get().replace("\u00a0","");
                 int [] goals;
                 goals = parseGoals(eventScoreRaw);
                 Element teamAwayElement = tournamentEventColumns.get(5);
                 String time = timeElement.getText().get();
-                String teamHome = teamHomeElement.getText().get();
-                String teamAway = teamAwayElement.getText().get();
+                String teamHome = teamHomeElement.getText().get().replace("\u00a0","");
+                String teamAway = teamAwayElement.getText().get().replace("\u00a0","");
                 String dateTimeToFormat = dateBase + time;
                 Date dateObject = simpleDateFormat.parse(dateTimeToFormat);
                 FootballMatchResult footballMatchResult = new FootballMatchResult();
@@ -116,6 +120,7 @@ public class FootballUpdateParserFlashScore implements Parser {
     public void run() {
         try {
             parse();
+            dataObjects.forEach(System.out::println);
             saver.save(dataObjects);
         } catch (InterruptedException e) {
             e.printStackTrace();

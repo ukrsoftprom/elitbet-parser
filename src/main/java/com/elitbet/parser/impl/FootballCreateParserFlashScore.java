@@ -28,9 +28,7 @@ public class FootballCreateParserFlashScore implements Parser {
     private Saver saver;
     private long waitAfterClick;
     private SimpleDateFormat simpleDateFormat;
-    /*private String getSimpleTournamentName(String pageTitle){
 
-    }*/
     FootballCreateParserFlashScore(){
         dataObjects = new ArrayList<>();
         Locale locale = new Locale("ru", "RU");
@@ -46,7 +44,7 @@ public class FootballCreateParserFlashScore implements Parser {
                 "Sa",
         });
 
-        simpleDateFormat = new SimpleDateFormat("y d/M E h:m", dateFormatSymbols);
+        simpleDateFormat = new SimpleDateFormat("y d/M E H:m", dateFormatSymbols);
     }
 
     @Override
@@ -69,9 +67,6 @@ public class FootballCreateParserFlashScore implements Parser {
             for(Element tournamentEvent:tournamentEvents){
                 List<Element> tournamentEventColumns = tournamentEvent.queryAll("td");
                 Element timeElement = tournamentEventColumns.get(1);
-                if(!timeElement.hasClass("time-playing")){
-                    continue;
-                }
                 Element teamHomeElement = tournamentEventColumns.get(2); //home team
                 Element teamAwayElement = tournamentEventColumns.get(3);
                 Element eventScoreElement = tournamentEventColumns.get(4);
@@ -80,8 +75,8 @@ public class FootballCreateParserFlashScore implements Parser {
                 Element teamAwayCoefficientElement = tournamentEventColumns.get(7);
 
                 String time = timeElement.getText().get();
-                String teamHome = teamHomeElement.getText().get();
-                String teamAway = teamAwayElement.getText().get();
+                String teamHome = teamHomeElement.getText().get().replace("\u00a0","");
+                String teamAway = teamAwayElement.getText().get().replace("\u00a0","");
                 double teamHomeCoefficient = 0;
                 double drawCoefficient = 0;
                 double teamAwayCoefficient = 0;

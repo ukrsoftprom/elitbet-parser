@@ -21,7 +21,7 @@ public class FootballMatchResult extends DataObject {
         try {
             stringBuilder.
                     append("access_token=").
-                    append(URLEncoder.encode("mikola_lox", "UTF-8")).
+                    append(URLEncoder.encode("1488", "UTF-8")).
                     append("&start_timestamp=").
                     append(URLEncoder.encode(String.valueOf(date.getTime()), "UTF-8")).
                     append("&first_name=").
