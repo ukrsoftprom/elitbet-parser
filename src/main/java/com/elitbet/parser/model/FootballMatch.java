@@ -89,7 +89,9 @@ public class FootballMatch extends DataObject {
                     append("&second_win=").
                     append(URLEncoder.encode(String.valueOf(guestCoefficient), "UTF-8")).
                     append("&draw=").
-                    append(URLEncoder.encode(String.valueOf(drawCoefficient), "UTF-8"));
+                    append(URLEncoder.encode(String.valueOf(drawCoefficient), "UTF-8")).
+                    append("&id=").
+                    append(URLEncoder.encode(eventId,"UTF-8"));
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
@@ -108,8 +110,7 @@ public class FootballMatch extends DataObject {
                 ", drawCoefficient=" + drawCoefficient +
                 ", date=" + date +
                 ", tournamentName='" + tournamentName + '\'' +
+                ", eventId='" + eventId + '\'' +
                 '}';
     }
-
-
 }

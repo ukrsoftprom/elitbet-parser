@@ -14,10 +14,7 @@ import io.webfolder.ui4j.api.dom.Element;
 import java.text.DateFormatSymbols;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Locale;
+import java.util.*;
 import java.util.logging.Logger;
 
 public class FootballUpdateParserFlashScore implements Parser {
@@ -79,6 +76,13 @@ public class FootballUpdateParserFlashScore implements Parser {
             String tournamentName = tournamentHead.queryAll(".name").get(0).getText().get();
             List<Element> tournamentEvents = tournamentTable.queryAll("tbody tr");
             for(Element tournamentEvent:tournamentEvents){
+                String tournamentEventId;
+                Optional<String> tournamentEventIdOptional;
+                if((tournamentEventIdOptional = tournamentEvent.getAttribute("id")).isPresent()){
+                    tournamentEventId = tournamentEventIdOptional.get();
+                }else{
+                    tournamentEventId = "No id";
+                }
                 List<Element> tournamentEventColumns = tournamentEvent.queryAll("td");
                 Element timeElement = tournamentEventColumns.get(1);  //time
                 Element eventStatusElement = tournamentEventColumns.get(2);
@@ -107,6 +111,7 @@ public class FootballUpdateParserFlashScore implements Parser {
                 footballMatchResult.setHomeTeamGoals(goals[0]);
                 footballMatchResult.setGuestTeamGoals(goals[1]);
                 footballMatchResult.setStatus(eventStatus);
+                footballMatchResult.setEventId(tournamentEventId);
                 dataObjects.add(footballMatchResult);
             }
         }

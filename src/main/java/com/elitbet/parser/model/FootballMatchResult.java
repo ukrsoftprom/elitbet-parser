@@ -35,7 +35,9 @@ public class FootballMatchResult extends DataObject {
                     append("&second_goals=").
                     append(URLEncoder.encode(String.valueOf(guestTeamGoals), "UTF-8")).
                     append("&status=").
-                    append(URLEncoder.encode(status,"UTF-8"));
+                    append(URLEncoder.encode(status,"UTF-8")).
+                    append("&id=").
+                    append(URLEncoder.encode(eventId,"UTF-8"));
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
@@ -101,6 +103,7 @@ public class FootballMatchResult extends DataObject {
                 ", date=" + date +
                 ", status='" + status + '\'' +
                 ", tournamentName='" + tournamentName + '\'' +
+                ", eventId='" + eventId + '\'' +
                 '}';
     }
 }
