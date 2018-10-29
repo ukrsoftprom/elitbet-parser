@@ -47,7 +47,6 @@ public class FootballCreateParserFlashScore implements Parser {
     @Override
     public void parse() throws InterruptedException, ParseException {
         Page page = browser.navigate("https://www.flashscore.com/");
-        page.show();
         Thread.sleep(5000);
         Document doc = page.getDocument();
         Element oddsTab = doc.queryAll("li.ifmenu-odds.li4 a").get(0);
@@ -124,7 +123,7 @@ public class FootballCreateParserFlashScore implements Parser {
             dataObjects.forEach(dataObject -> {
                 System.out.println(dataObject.toURL());
             });
-            //saver.save(dataObjects);
+            saver.save(dataObjects);
         } catch (InterruptedException e) {
             e.printStackTrace();
         } catch (ParseException e) {

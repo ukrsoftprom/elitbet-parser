@@ -131,7 +131,7 @@ public class FootballUpdateParserFlashScore implements Parser {
             dataObjects.forEach(dataObject -> {
                 System.out.println(dataObject.toURL());
             });
-            //saver.save(dataObjects);
+            saver.save(dataObjects);
         } catch (InterruptedException e) {
             e.printStackTrace();
         } catch (ParseException e) {
