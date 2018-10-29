@@ -85,11 +85,12 @@ public class FootballUpdateParserFlashScore implements Parser {
                 String eventStatus = eventStatusElement.getText().get().replace("\u00a0","");
                 Element teamHomeElement = tournamentEventColumns.get(3); //home team
                 Element eventScoreElement = tournamentEventColumns.get(4);
-
+                String eventScoreRaw;
                 if(!eventScoreElement.getText().isPresent()){
-                    continue;
+                    eventScoreRaw = "-";
+                } else{
+                    eventScoreRaw = eventScoreElement.getText().get().replace("\u00a0","");
                 }
-                String eventScoreRaw = eventScoreElement.getText().get().replace("\u00a0","");
                 int [] goals;
                 goals = parseGoals(eventScoreRaw);
                 Element teamAwayElement = tournamentEventColumns.get(5);
