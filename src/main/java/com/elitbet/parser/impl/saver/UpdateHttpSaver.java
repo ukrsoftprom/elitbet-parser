@@ -22,8 +22,8 @@ public class UpdateHttpSaver implements Saver {
     public void save(DataObject dataObject) {
         URL url = null;
         try {
-            System.out.println(host + "/events/footballmatches/update?" + dataObject.toURL());
-            url = new URL(host + "/events/footballmatches/update?" + dataObject.toURL());
+            System.out.println(host + "/events/update?" + dataObject.toURL());
+            url = new URL(host + "/events/update?" + dataObject.toURL());
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }

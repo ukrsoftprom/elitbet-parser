@@ -24,15 +24,15 @@ public class FootballMatchResult extends DataObject {
                     append(URLEncoder.encode("1488", "UTF-8")).
                     append("&start_timestamp=").
                     append(URLEncoder.encode(String.valueOf(date.getTime()), "UTF-8")).
-                    append("&first_name=").
+                    append("&names=").
                     append(URLEncoder.encode(homeTeam, "UTF-8")).
-                    append("&second_name=").
+                    append(";").
                     append(URLEncoder.encode(guestTeam, "UTF-8")).
                     append("&tournament=").
                     append(URLEncoder.encode(tournamentName, "UTF-8")).
-                    append("&first_goals=").
+                    append("&results=goals:").
                     append(URLEncoder.encode(String.valueOf(homeTeamGoals), "UTF-8")).
-                    append("&second_goals=").
+                    append(";goals:").
                     append(URLEncoder.encode(String.valueOf(guestTeamGoals), "UTF-8")).
                     append("&status=").
                     append(URLEncoder.encode(status,"UTF-8")).

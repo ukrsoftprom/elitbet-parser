@@ -74,24 +74,26 @@ public class FootballMatch extends DataObject {
         StringBuilder stringBuilder = new StringBuilder();
         try {
             stringBuilder.
-                    append("/events/footballmatches/create?access_token=").
+                    append("/events/create?access_token=").
                     append(URLEncoder.encode("1488", "UTF-8")).
                     append("&start_timestamp=").
                     append(URLEncoder.encode(String.valueOf(getTimestamp()), "UTF-8")).
-                    append("&first_name=").
+                    append("&names=").
                     append(URLEncoder.encode(String.valueOf(homeTeam), "UTF-8")).
-                    append("&second_name=").
+                    append(";").
                     append(URLEncoder.encode(String.valueOf(guestTeam), "UTF-8")).
                     append("&tournament=").
                     append(URLEncoder.encode(String.valueOf(tournamentName), "UTF-8")).
-                    append("&first_win=").
+                    append("&coefficients=1:").
                     append(URLEncoder.encode(String.valueOf(homeCoefficient), "UTF-8")).
-                    append("&second_win=").
+                    append(";2:").
                     append(URLEncoder.encode(String.valueOf(guestCoefficient), "UTF-8")).
-                    append("&draw=").
+                    append(";X:").
                     append(URLEncoder.encode(String.valueOf(drawCoefficient), "UTF-8")).
                     append("&id=").
-                    append(URLEncoder.encode(eventId,"UTF-8"));
+                    append(URLEncoder.encode(eventId,"UTF-8")).
+                    append("&event_type=").
+                    append(URLEncoder.encode("Football Match", "UTF-8"));
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }

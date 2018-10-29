@@ -1,6 +1,7 @@
 package com.elitbet.parser.impl;
 
 import com.elitbet.parser.Parser;
+import com.elitbet.parser.annotations.Data;
 import com.elitbet.parser.impl.saver.Saver;
 import com.elitbet.parser.model.DataObject;
 import com.elitbet.parser.model.FootballMatch;
@@ -112,6 +113,7 @@ public class FootballUpdateParserFlashScore implements Parser {
                 footballMatchResult.setGuestTeamGoals(goals[1]);
                 footballMatchResult.setStatus(eventStatus);
                 footballMatchResult.setEventId(tournamentEventId);
+                footballMatchResult.setEventType("Football Match");
                 dataObjects.add(footballMatchResult);
             }
         }
@@ -126,8 +128,10 @@ public class FootballUpdateParserFlashScore implements Parser {
     public void run() {
         try {
             parse();
-            dataObjects.forEach(System.out::println);
-            saver.save(dataObjects);
+            dataObjects.forEach(dataObject -> {
+                System.out.println(dataObject.toURL());
+            });
+            //saver.save(dataObjects);
         } catch (InterruptedException e) {
             e.printStackTrace();
         } catch (ParseException e) {
