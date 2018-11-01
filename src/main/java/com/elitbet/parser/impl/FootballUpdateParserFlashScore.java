@@ -63,61 +63,6 @@ public class FootballUpdateParserFlashScore implements Parser {
             return goals;
         }
     }
-    @Override
-    public void parse() throws InterruptedException, ParseException {
-        Page page = browser.navigate("https://www.flashscore.com/");
-        Thread.sleep(5000);
-        Document doc = page.getDocument();
-        String date = doc.queryAll(".today").get(0).getText().get();
-        String dateBase = "2018 " + date + " ";
-        List<Element> tournamentTables = doc.queryAll(".table-main table.soccer");
-        System.out.println(tournamentTables.size());
-        for(Element tournamentTable:tournamentTables){
-            Element tournamentHead = tournamentTable.queryAll("thead tr").get(0);
-            String tournamentName = tournamentHead.queryAll(".name").get(0).getText().get();
-            List<Element> tournamentEvents = tournamentTable.queryAll("tbody tr");
-            for(Element tournamentEvent:tournamentEvents){
-                String tournamentEventId;
-                Optional<String> tournamentEventIdOptional;
-                if((tournamentEventIdOptional = tournamentEvent.getAttribute("id")).isPresent()){
-                    tournamentEventId = tournamentEventIdOptional.get();
-                }else{
-                    tournamentEventId = "No id";
-                }
-                List<Element> tournamentEventColumns = tournamentEvent.queryAll("td");
-                Element timeElement = tournamentEventColumns.get(1);  //time
-                Element eventStatusElement = tournamentEventColumns.get(2);
-                String eventStatus = eventStatusElement.getText().get().replace("\u00a0","");
-                Element teamHomeElement = tournamentEventColumns.get(3); //home team
-                Element eventScoreElement = tournamentEventColumns.get(4);
-                String eventScoreRaw;
-                if(!eventScoreElement.getText().isPresent()){
-                    eventScoreRaw = "-";
-                } else{
-                    eventScoreRaw = eventScoreElement.getText().get().replace("\u00a0","");
-                }
-                int [] goals;
-                goals = parseGoals(eventScoreRaw);
-                Element teamAwayElement = tournamentEventColumns.get(5);
-                String time = timeElement.getText().get();
-                String teamHome = teamHomeElement.getText().get().replace("\u00a0","");
-                String teamAway = teamAwayElement.getText().get().replace("\u00a0","");
-                String dateTimeToFormat = dateBase + time;
-                Date dateObject = simpleDateFormat.parse(dateTimeToFormat);
-                FootballMatchResult footballMatchResult = new FootballMatchResult();
-                footballMatchResult.setDate(dateObject);
-                footballMatchResult.setTournamentName(tournamentName);
-                footballMatchResult.setHomeTeam(teamHome);
-                footballMatchResult.setGuestTeam(teamAway);
-                footballMatchResult.setHomeTeamGoals(goals[0]);
-                footballMatchResult.setGuestTeamGoals(goals[1]);
-                footballMatchResult.setStatus(eventStatus);
-                footballMatchResult.setEventId(tournamentEventId);
-                footballMatchResult.setEventType("Football Match");
-                dataObjects.add(footballMatchResult);
-            }
-        }
-    }
 
     @Override
     public List<DataObject> getDataObjects() {
@@ -126,17 +71,7 @@ public class FootballUpdateParserFlashScore implements Parser {
 
     @Override
     public void run() {
-        try {
-            parse();
-            dataObjects.forEach(dataObject -> {
-                System.out.println(dataObject.toURL());
-            });
-            saver.save(dataObjects);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
+
     }
 
     public Saver getSaver() {

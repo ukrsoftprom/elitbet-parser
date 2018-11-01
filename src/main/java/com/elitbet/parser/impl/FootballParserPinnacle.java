@@ -26,7 +26,7 @@ import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 
-public class FootballParserPinnacle implements Parser {
+public class FootballParserPinnacle  {
     private final static Logger logger = Logger.getLogger(FootballParserPinnacle.class.getName());
     int year = Year.now().getValue();
     private BrowserEngine browser = BrowserFactory.getWebKit();
@@ -50,26 +50,7 @@ public class FootballParserPinnacle implements Parser {
 
         dateFormat = new SimpleDateFormat("E d/M  h.m y z", dateFormatSymbols);
     }
-    @Override
-    public void parse() {
-        BufferedReader bf = null;
-        try {
-            bf = new BufferedReader(new FileReader(new File("tournaments")));
-            List<String> tournamentLinks = bf.lines().collect(Collectors.toList());
-            for (String tournamentLink : tournamentLinks) {
-                parseTournament(tournamentLink);
-            }
-        } catch (FileNotFoundException e) {
-            logger.severe(e.toString());
-        } catch (ParseException e) {
-            logger.severe(e.toString());
-        }
-    }
 
-    @Override
-    public List<DataObject> getDataObjects() {
-        return dataObjects;
-    }
 
     private String parseTournamentName(String tournamentTitleRaw) {
         int indexBetting = tournamentTitleRaw.toLowerCase().indexOf("betting");
@@ -151,9 +132,5 @@ public class FootballParserPinnacle implements Parser {
         this.saver = saver;
     }
 
-    @Override
-    public void run() {
-        parse();
-        saver.save(dataObjects);
-    }
+
 }

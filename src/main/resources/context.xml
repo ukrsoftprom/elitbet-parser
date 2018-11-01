@@ -9,17 +9,21 @@
                 <property name="host" value="http://localhost:8080"></property>
             </bean>
         </property>
-        <property name="waitAfterClick" value="8000"/> <!--if your computer or internet connection is slow - increase this value-->
+        <property name="waitAfterClick" value="5000"/>
         <property name="currentYear" value="2018"/>
+        <property name="mode" value="create"/>
+        <property name="parserInterval" value="30000"/>
     </bean>
-    <bean id="updateparser" class="com.elitbet.parser.impl.FootballUpdateParserFlashScore">
+    <bean id="updateparser" class="com.elitbet.parser.impl.FootballCreateParserFlashScore">
         <property name="saver">
             <bean class="com.elitbet.parser.impl.saver.UpdateHttpSaver">
                 <property name="host" value="http://localhost:8080"></property>
             </bean>
         </property>
-        <property name="waitAfterClick"
-                  value="8000"/> <!--if your computer or internet connection is slow - increase this value-->
+        <property name="waitAfterClick" value="5000"/>
+        <property name="mode" value="update"/>
+        <property name="parserInterval" value="60000"/>
+        <property name="currentYear" value="2018"/>
     </bean>
     <!--<bean id="updateparser" class="com.elitbet.parser.impltballCreateParserFlashScore"-->
 </beans>
