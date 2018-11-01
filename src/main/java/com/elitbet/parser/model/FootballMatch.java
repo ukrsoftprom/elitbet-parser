@@ -15,7 +15,7 @@ public class FootballMatch extends DataObject {
     private double homeCoefficient;
     private double guestCoefficient;
     private double drawCoefficient;
-    private Date date;
+
 
     public String getHomeTeam() {
         return homeTeam;
@@ -57,17 +57,8 @@ public class FootballMatch extends DataObject {
         this.drawCoefficient = drawCoefficient;
     }
 
-    public Date getDate() {
-        return date;
-    }
 
-    public void setDate(Date date) {
-        this.date = date;
-    }
 
-    public long getTimestamp(){
-        return date.getTime();
-    }
     //events/footballmatches/create?access_token=ry6n3n7m3u&start_timestamp=100000000&first_name=Arsenal&second_name=Chelsea&tournament=EPL&first_win=2.0&second_win=2.5&draw=3.2
     @Override
     public String toURL() {

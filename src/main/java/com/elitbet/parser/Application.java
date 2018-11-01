@@ -3,6 +3,7 @@ package com.elitbet.parser;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import java.util.concurrent.ThreadPoolExecutor;
 import java.util.logging.Logger;
 
 public class Application {
@@ -10,9 +11,15 @@ public class Application {
 
     public static void main(String[] args) throws InterruptedException {
         ApplicationContext applicationContext = new ClassPathXmlApplicationContext("context.xml");
-        Parser parser = (Parser) applicationContext.getBean("createparser");
-        Thread parserThread = new Thread(parser);
-        parserThread.start();
-        parserThread.join();
+        {
+            Parser createparser = (Parser) applicationContext.getBean("createparser");
+            Thread createparserThread = new Thread(createparser);
+            createparserThread.start();
+        }
+        /*{
+            Parser updateparser = (Parser) applicationContext.getBean("updateparser");
+            Thread updateparserThread = new Thread(updateparser);
+            updateparserThread.start();
+        }*/
     }
 }

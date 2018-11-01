@@ -1,9 +1,12 @@
 package com.elitbet.parser.model;
 
+import java.util.Date;
+
 public abstract class DataObject {
     protected String tournamentName;
     protected String eventId;
     protected String eventType;
+    protected Date date;
     public String getTournamentName() {
         return tournamentName;
     }
@@ -28,5 +31,17 @@ public abstract class DataObject {
         this.eventType = eventType;
     }
 
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
     public abstract String toURL();
+    public long getTimestamp(){
+        return date.getTime();
+    }
+
 }
