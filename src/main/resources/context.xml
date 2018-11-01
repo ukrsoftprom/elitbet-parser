@@ -9,8 +9,8 @@
                 <property name="host" value="http://localhost:8080"></property>
             </bean>
         </property>
-        <property name="waitAfterClick"
-                  value="8000"/> <!--if your computer or internet connection is slow - increase this value-->
+        <property name="waitAfterClick" value="8000"/> <!--if your computer or internet connection is slow - increase this value-->
+        <property name="currentYear" value="2018"/>
     </bean>
     <bean id="updateparser" class="com.elitbet.parser.impl.FootballUpdateParserFlashScore">
         <property name="saver">
