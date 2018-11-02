@@ -7,6 +7,7 @@ import java.net.URLEncoder;
 import java.util.Date;
 import java.util.logging.Logger;
 
+
 @Data
 public class FootballMatch extends DataObject {
     private final static Logger logger = Logger.getLogger(FootballMatch.class.getName());
@@ -59,19 +60,21 @@ public class FootballMatch extends DataObject {
 
 
 
-    //events/footballmatches/create?access_token=ry6n3n7m3u&start_timestamp=100000000&first_name=Arsenal&second_name=Chelsea&tournament=EPL&first_win=2.0&second_win=2.5&draw=3.2
+    /**
+     * http://localhost:8080/events/create?access_token=1&event_type=Football Match&id=rmtmd6&start_timestamp=12334545674&parameters=home_name:ManCity;away_name:ManUtd;&tournament=EPL&coefficients=1:1.43;X:4.45;2:10.9;
+     */
     @Override
     public String toURL() {
         StringBuilder stringBuilder = new StringBuilder();
         try {
             stringBuilder.
                     append("/events/create?access_token=").
-                    append(URLEncoder.encode("1488", "UTF-8")).
+                    append(URLEncoder.encode("1", "UTF-8")).
                     append("&start_timestamp=").
                     append(URLEncoder.encode(String.valueOf(getTimestamp()), "UTF-8")).
-                    append("&names=").
+                    append("&parameters=home_name:").
                     append(URLEncoder.encode(String.valueOf(homeTeam), "UTF-8")).
-                    append(";").
+                    append(";away_name=").
                     append(URLEncoder.encode(String.valueOf(guestTeam), "UTF-8")).
                     append("&tournament=").
                     append(URLEncoder.encode(String.valueOf(tournamentName), "UTF-8")).
@@ -90,7 +93,6 @@ public class FootballMatch extends DataObject {
         }
         String url = stringBuilder.toString();
         return url;
-
     }
 
     @Override

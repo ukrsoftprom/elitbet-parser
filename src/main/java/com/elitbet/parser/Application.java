@@ -16,10 +16,10 @@ public class Application {
             Thread createparserThread = new Thread(createparser);
             createparserThread.start();
         }
-        /*{
+        {
             Parser updateparser = (Parser) applicationContext.getBean("updateparser");
             Thread updateparserThread = new Thread(updateparser);
             updateparserThread.start();
-        }*/
+        }
     }
 }

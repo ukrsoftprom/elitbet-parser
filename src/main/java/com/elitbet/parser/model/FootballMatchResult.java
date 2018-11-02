@@ -15,25 +15,30 @@ public class FootballMatchResult extends DataObject {
     public FootballMatchResult() {
     }
 
+
+    /**
+     *
+     * localhost:8080/events/update?access_token=1&id=rmtmd6&start_timestamp=123234&parameters=home_name:ManCity;away_name:ManCity;home_goals:1;away_goals:0&tournament=EPL&status=Finished
+     */
     @Override
     public String toURL() {
         StringBuilder stringBuilder = new StringBuilder();
         try {
             stringBuilder.
                     append("access_token=").
-                    append(URLEncoder.encode("1488", "UTF-8")).
+                    append(URLEncoder.encode("1", "UTF-8")).
                     append("&start_timestamp=").
                     append(URLEncoder.encode(String.valueOf(date.getTime()), "UTF-8")).
-                    append("&names=").
+                    append("&parameters=home_name:").
                     append(URLEncoder.encode(homeTeam, "UTF-8")).
-                    append(";").
+                    append(";away_name:").
                     append(URLEncoder.encode(guestTeam, "UTF-8")).
+                    append(";home_goals:").
+                    append(URLEncoder.encode(String.valueOf(homeTeamGoals), "UTF-8")).
+                    append(";away_goals:").
+                    append(URLEncoder.encode(String.valueOf(guestTeamGoals), "UTF-8")).
                     append("&tournament=").
                     append(URLEncoder.encode(tournamentName, "UTF-8")).
-                    append("&results=goals:").
-                    append(URLEncoder.encode(String.valueOf(homeTeamGoals), "UTF-8")).
-                    append(";goals:").
-                    append(URLEncoder.encode(String.valueOf(guestTeamGoals), "UTF-8")).
                     append("&status=").
                     append(URLEncoder.encode(status,"UTF-8")).
                     append("&id=").

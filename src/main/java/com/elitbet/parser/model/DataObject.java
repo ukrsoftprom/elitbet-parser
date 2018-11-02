@@ -3,6 +3,7 @@ package com.elitbet.parser.model;
 import java.util.Date;
 
 public abstract class DataObject {
+    protected String accessToken;
     protected String tournamentName;
     protected String eventId;
     protected String eventType;
@@ -44,4 +45,11 @@ public abstract class DataObject {
         return date.getTime();
     }
 
+    public String getAccessToken() {
+        return accessToken;
+    }
+
+    public void setAccessToken(String accessToken) {
+        this.accessToken = accessToken;
+    }
 }
