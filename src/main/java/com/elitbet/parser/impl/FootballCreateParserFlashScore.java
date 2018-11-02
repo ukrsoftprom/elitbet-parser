@@ -10,11 +10,10 @@ import io.webfolder.ui4j.api.browser.BrowserFactory;
 import io.webfolder.ui4j.api.browser.Page;
 import io.webfolder.ui4j.api.dom.Document;
 import io.webfolder.ui4j.api.dom.Element;
-import io.webfolder.ui4j.api.dom.Option;
-import javafx.scene.control.Tab;
+
 import org.jetbrains.annotations.NotNull;
 
-import javax.xml.crypto.Data;
+
 import java.text.DateFormatSymbols;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;

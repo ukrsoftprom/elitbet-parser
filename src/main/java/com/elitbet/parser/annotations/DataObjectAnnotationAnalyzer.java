@@ -1,6 +1,6 @@
 package com.elitbet.parser.annotations;
 
-import com.elitbet.parser.annotations.Data;
+
 import com.elitbet.parser.model.DataObject;
 
 import java.lang.reflect.Field;

@@ -10,10 +10,7 @@ import io.webfolder.ui4j.api.browser.Page;
 import io.webfolder.ui4j.api.dom.Document;
 import io.webfolder.ui4j.api.dom.Element;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
+
 import java.text.DateFormatSymbols;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -23,7 +20,6 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
 import java.util.logging.Logger;
-import java.util.stream.Collectors;
 
 
 public class FootballParserPinnacle  {
