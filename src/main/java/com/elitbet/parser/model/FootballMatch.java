@@ -74,7 +74,7 @@ public class FootballMatch extends DataObject {
                     append(URLEncoder.encode(String.valueOf(getTimestamp()), "UTF-8")).
                     append("&parameters=home_name:").
                     append(URLEncoder.encode(String.valueOf(homeTeam), "UTF-8")).
-                    append(";away_name=").
+                    append(";away_name:").
                     append(URLEncoder.encode(String.valueOf(guestTeam), "UTF-8")).
                     append("&tournament=").
                     append(URLEncoder.encode(String.valueOf(tournamentName), "UTF-8")).

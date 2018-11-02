@@ -60,7 +60,11 @@
             <version>1.5.1</version>
             <scope>test</scope>
         </dependency>
-
+        <dependency>
+            <groupId>org.wildfly.swarm</groupId>
+            <artifactId>javafx</artifactId>
+            <version>2016.10.0</version>
+        </dependency>
     </dependencies>
 
     <!--<build>

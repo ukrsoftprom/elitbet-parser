@@ -322,6 +322,7 @@ public class FootballCreateParserFlashScore implements Parser {
                     break;
                 }
             }
+            saver.save(dataObjects);
             dataObjects.clear();
             try {
                 Thread.sleep(parserInterval);
