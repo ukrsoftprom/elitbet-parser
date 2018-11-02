@@ -95,6 +95,7 @@ public class FootballMatch extends DataObject {
         return url;
     }
 
+    
     @Override
     public String toString() {
         return "FootballMatch{" +
