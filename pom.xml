@@ -60,12 +60,8 @@
             <version>1.5.1</version>
             <scope>test</scope>
         </dependency>
-        <dependency>
-            <!-- jsoup HTML parser library @ https://jsoup.org/ -->
-            <groupId>org.jsoup</groupId>
-            <artifactId>jsoup</artifactId>
-            <version>1.11.3</version>
-        </dependency>
+ 
+
         <dependency>
             <groupId>org.wildfly.swarm</groupId>
             <artifactId>javafx</artifactId>
