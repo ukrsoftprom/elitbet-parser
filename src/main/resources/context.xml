@@ -12,7 +12,7 @@
         <property name="waitAfterClick" value="5000"/>
         <property name="currentYear" value="2018"/>
         <property name="mode" value="create"/>
-        <property name="parserInterval" value="30000"/>
+        <property name="parserInterval" value="5000"/>
     </bean>
     <bean id="updateparser" class="com.elitbet.parser.impl.FootballCreateParserFlashScore">
         <property name="saver">

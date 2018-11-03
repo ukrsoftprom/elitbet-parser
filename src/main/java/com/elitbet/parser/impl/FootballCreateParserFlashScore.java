@@ -11,6 +11,7 @@ import io.webfolder.ui4j.api.browser.Page;
 import io.webfolder.ui4j.api.dom.Document;
 import io.webfolder.ui4j.api.dom.Element;
 
+import io.webfolder.ui4j.webkit.dom.WebKitPage;
 import org.jetbrains.annotations.NotNull;
 
 
@@ -26,6 +27,7 @@ public class FootballCreateParserFlashScore implements Parser {
 
     private List<DataObject> dataObjects;
     private BrowserEngine browser = BrowserFactory.getWebKit();
+    private Page page;
     private Saver saver;
     private long waitAfterClick;
     private SimpleDateFormat simpleDateFormat;
@@ -126,9 +128,6 @@ public class FootballCreateParserFlashScore implements Parser {
     }
 
     private void chooseAllGamesTab(@NotNull Page page) {
-        if(currentTab == Tabs.ALL_GAMES){
-            return;
-        }
         Document doc = page.getDocument();
         Element allGamesTab = doc.queryAll("li.ifmenu-all.li0 a").get(0);
         allGamesTab.click();
@@ -141,9 +140,7 @@ public class FootballCreateParserFlashScore implements Parser {
     }
 
     private void chooseOddsTab(@NotNull Page page) {
-        if(currentTab == Tabs.ODDS){
-            return;
-        }
+
         Document doc = page.getDocument();
         Element oddsTab = doc.queryAll("li.ifmenu-odds.li4 a").get(0);
         oddsTab.click();
@@ -271,7 +268,9 @@ public class FootballCreateParserFlashScore implements Parser {
             drawCoefficient = Double.valueOf(getTextFromElement(drawCoefficientElement));
             teamGuestCoefficient = Double.valueOf(getTextFromElement(teamGuestCoefficientElement));
         } catch (NumberFormatException e) {
-            logger.info(e.getMessage());
+            System.out.println(e.getMessage());
+            System.out.println((currentTab.toString()));
+            System.out.println(getTextFromElement(teamHomeElement));
             return null;
         }
 
@@ -297,8 +296,11 @@ public class FootballCreateParserFlashScore implements Parser {
 
     @Override
     public void run() {
+
         while (true) {
-            Page page = browser.navigate("https://www.flashscore.com/");
+            System.out.println("Before loading");
+            page = browser.navigate("https://www.flashscore.com/");
+            System.out.println("After loading");
             try {
                 Thread.sleep(waitAfterClick);
             } catch (InterruptedException e) {
@@ -322,8 +324,10 @@ public class FootballCreateParserFlashScore implements Parser {
                     break;
                 }
             }
-            saver.save(dataObjects);
+            //saver.save(dataObjects);
             dataObjects.clear();
+            page.close();
+            System.out.println("After close");
             try {
                 Thread.sleep(parserInterval);
             } catch (InterruptedException e) {
