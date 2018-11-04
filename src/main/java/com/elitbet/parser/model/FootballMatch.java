@@ -68,7 +68,7 @@ public class FootballMatch extends DataObject {
         StringBuilder stringBuilder = new StringBuilder();
         try {
             stringBuilder.
-                    append("/events/create?access_token=").
+                    append("access_token=").
                     append(URLEncoder.encode("1", "UTF-8")).
                     append("&start_timestamp=").
                     append(URLEncoder.encode(String.valueOf(getTimestamp()), "UTF-8")).
@@ -78,12 +78,12 @@ public class FootballMatch extends DataObject {
                     append(URLEncoder.encode(String.valueOf(guestTeam), "UTF-8")).
                     append("&tournament=").
                     append(URLEncoder.encode(String.valueOf(tournamentName), "UTF-8")).
-                    append("&coefficients=1:").
+                    append("&odds=1:").
                     append(URLEncoder.encode(String.valueOf(homeCoefficient), "UTF-8")).
-                    append(";2:").
-                    append(URLEncoder.encode(String.valueOf(guestCoefficient), "UTF-8")).
                     append(";X:").
                     append(URLEncoder.encode(String.valueOf(drawCoefficient), "UTF-8")).
+                    append(";2:").
+                    append(URLEncoder.encode(String.valueOf(guestCoefficient), "UTF-8")).
                     append("&id=").
                     append(URLEncoder.encode(eventId,"UTF-8")).
                     append("&event_type=").

@@ -260,6 +260,10 @@ public class FootballCreateParserFlashScore implements Parser {
         Element drawCoefficientElement = tournamentEventColumns.get(6);
         Element teamGuestCoefficientElement = tournamentEventColumns.get(7);
 
+        if(teamHomeCoefficientElement.getInnerHTML().contains("not-published")){
+            return null;
+        }
+
         double teamHomeCoefficient = 0;
         double drawCoefficient = 0;
         double teamGuestCoefficient = 0;
@@ -324,7 +328,7 @@ public class FootballCreateParserFlashScore implements Parser {
                     break;
                 }
             }
-            //saver.save(dataObjects);
+            saver.save(dataObjects);
             dataObjects.clear();
             page.close();
             System.out.println("After close");

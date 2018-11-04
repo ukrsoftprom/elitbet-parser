@@ -47,7 +47,7 @@ public class CreateHttpSaver implements Saver {
     public void save(DataObject dataObject) {
         URL url = null;
         try {
-            System.out.println(host + dataObject.toURL());
+            System.out.println(host + "/parser?" + dataObject.toURL());
             url = new URL(host + dataObject.toURL());
         } catch (MalformedURLException e) {
             e.printStackTrace();
